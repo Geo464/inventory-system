@@ -1,34 +1,32 @@
-/*Type = [
-    types of products
-    ]
-*/
-
-class Product{
-    constructor(name , price , stock , type){
+class Products {
+    constructor(name, price, stock, typeId) {
         this.name = name;
         this.price = price;
         this.stock = stock;
-        this.type = type; 
-    };
+        this.typeId = typeId;
+    }
 
-    static createProduct(name , price , stock , typeP){
-        if (price <= 0 || typeof price !== "number"){
-            throw new Error("Precio menor a 0, solo pueden ingresarse cantidades mayores 0");
+    static create(name, price, stock, typeId) {
+
+        if (!name || name.trim() === "") {
+            throw new Error("Nombre inválido");
         }
-        if (stock < 0 || typeof stock !== "number"){
-            throw new Error("Stock menor a 0, solo pueden ingresarse cantidades mayores a 0");
+
+        if (price <= 0) {
+            throw new Error("Precio inválido");
         }
-        if (name.length <= 0 || typeof name !== "string"){ 
-            throw new Error("Nombre vacio, debe al menos existir un caracter en el nombre");     
+
+        if (stock < 0) {
+            throw new Error("Stock inválido");
         }
-        if (typeof typeP !== "string"){
-            throw new Error("Tipo no valido");
-        }
+
         return new Product(
-            name, 
-            price, 
-            stock, 
-            typeP 
+            name,
+            price,
+            stock,
+            typeId
         );
-    };
+    }
 }
+
+export default Product;
