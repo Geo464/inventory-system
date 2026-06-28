@@ -1,15 +1,15 @@
-class ProductsType {
+class ProductType {
     constructor(typeName) {
         this.typeName = typeName;
     }
 
     static create(typeName) {
-        if (!typeName) {
+        if (!typeName || typeName.trim() === "") {
             throw new Error("Tipo inválido");
         }
 
-        return new ProductType(typeName);
+        return new ProductType(typeName.trim());
     }
 }
 
-export default ProductType;
+module.exports = ProductType;

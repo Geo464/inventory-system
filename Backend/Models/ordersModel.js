@@ -1,18 +1,22 @@
-class Orders {
-    constructor(customerId, total = 0, createdDate = new Date()) {
+class Order {
+    constructor(customerId, userId, total = 0, createdDate = new Date()) {
         this.customerId = customerId;
+        this.userId = userId;
         this.total = total;
         this.createdDate = createdDate;
     }
 
-    static create(customerId) {
-
+    static create(customerId, userId) {
         if (!customerId) {
             throw new Error("Cliente requerido");
         }
 
-        return new Order(customerId);
+        if (!userId) {
+            throw new Error("Usuario requerido");
+        }
+
+        return new Order(customerId, userId, 0, new Date());
     }
 }
 
-export default Order;
+module.exports = Order;

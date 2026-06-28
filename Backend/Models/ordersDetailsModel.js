@@ -1,4 +1,4 @@
-class OrdersDetail {
+class OrderDetail {
     constructor(orderId, productId, quantity, priceAtPurchase) {
         this.orderId = orderId;
         this.productId = productId;
@@ -6,20 +6,26 @@ class OrdersDetail {
         this.priceAtPurchase = priceAtPurchase;
     }
 
-    static create(orderId, productId, quantity, price) {
+    static create(orderId, productId, quantity, priceAtPurchase) {
+        if (!orderId || !productId) {
+            throw new Error("Orden y producto requeridos");
+        }
 
         if (quantity <= 0) {
             throw new Error("Cantidad inválida");
+        }
+
+        if (priceAtPurchase <= 0) {
+            throw new Error("Precio inválido");
         }
 
         return new OrderDetail(
             orderId,
             productId,
             quantity,
-            price
+            priceAtPurchase
         );
     }
-
 }
 
-export default OrderDetail;
+module.exports = OrderDetail;

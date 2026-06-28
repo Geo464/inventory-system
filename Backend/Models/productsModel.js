@@ -1,4 +1,4 @@
-class Products {
+class Product {
     constructor(name, price, stock, typeId) {
         this.name = name;
         this.price = price;
@@ -7,26 +7,25 @@ class Products {
     }
 
     static create(name, price, stock, typeId) {
-
         if (!name || name.trim() === "") {
             throw new Error("Nombre inválido");
         }
 
-        if (price <= 0) {
+        if (price === undefined || price === null || price <= 0) {
             throw new Error("Precio inválido");
         }
 
-        if (stock < 0) {
+        if (stock === undefined || stock === null || stock < 0) {
             throw new Error("Stock inválido");
         }
 
         return new Product(
-            name,
-            price,
-            stock,
+            name.trim(),
+            Number(price),
+            Number(stock),
             typeId
         );
     }
 }
 
-export default Product;
+module.exports = Product;

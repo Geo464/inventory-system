@@ -1,4 +1,4 @@
-class Customers {
+class Customer {
     constructor(name, typeId, createdDate = new Date()) {
         this.name = name;
         this.typeId = typeId;
@@ -6,15 +6,16 @@ class Customers {
     }
 
     static create(name, typeId) {
-        if (!name) {
+        if (!name || name.trim() === "") {
             throw new Error("Nombre requerido");
         }
 
         return new Customer(
-            name,
-            typeId
+            name.trim(),
+            typeId,
+            new Date()
         );
     }
 }
 
-export default Customer;
+module.exports = Customer;

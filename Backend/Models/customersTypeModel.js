@@ -1,15 +1,15 @@
-class CustomersType {
+class CustomerType {
     constructor(typeName) {
         this.typeName = typeName;
     }
 
     static create(typeName) {
-        if (!typeName) {
+        if (!typeName || typeName.trim() === "") {
             throw new Error("Tipo requerido");
         }
 
-        return new CustomerType(typeName);
+        return new CustomerType(typeName.trim());
     }
 }
 
-export default CustomerType;
+module.exports = CustomerType;

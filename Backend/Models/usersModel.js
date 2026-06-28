@@ -1,5 +1,4 @@
-import bcrypt from "bcrypt";
-
+const bcrypt = require("bcrypt");
 
 class User {
     constructor(username, email, passwordHash, roleId, createdDate = new Date()) {
@@ -10,20 +9,26 @@ class User {
         this.createdDate = createdDate;
     }
 
-    static async create(username, email, passwordHash, roleId) {
-        if (!username || !email || !passwordHash) {
+    static async create(username, email, password, roleId) {
+        if (!username || !email || !password) {
             throw new Error("Datos de usuario incompletos");
         }
-        
-        let hash = await bcrypt.hash(passwordHash , 10); 
+
+        let hash;
+        try {
+            hash = await bcrypt.hash(password, 10);
+        } catch (err) {
+            throw new Error("Error de ejecución al crear usuario");
+        }
 
         return new User(
-            username,
-            email,
+            username.trim(),
+            email.trim().toLowerCase(),
             hash,
-            roleId
+            roleId,
+            new Date()
         );
     }
 }
 
-export default User;
+module.exports = User;

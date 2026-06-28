@@ -12,17 +12,15 @@ const configure = {
 };
 
 const ConnectSQL = new sql.ConnectionPool(configure).connect()
-.then(    
-    pool => {
-        console.log("Servidor Conectado");
-        return pool;
-    }
-).catch(
-    err => {
-        console.log("Base de datos no conectada a servidor" , err);
-    }
-);
-module.exports = {
-    sql, 
-    ConnectSQL
-};
+    .then(    
+        pool => {
+            console.log("Servidor Conectado");
+            return pool;
+        }
+    ).catch(
+        err => {
+            console.log("Base de datos no conectada a servidor" , err);
+        }
+    );
+//Export modules//
+module.exports = ConnectSQL;

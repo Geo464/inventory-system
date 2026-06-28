@@ -1,15 +1,15 @@
-class Roles {
+class Role {
     constructor(roleName) {
         this.roleName = roleName;
     }
 
     static create(roleName) {
-        if (!roleName) {
+        if (!roleName || roleName.trim() === "") {
             throw new Error("El nombre del rol es requerido");
         }
 
-        return new Role(roleName);
+        return new Role(roleName.trim());
     }
 }
 
-export default Role;
+module.exports = Role;
